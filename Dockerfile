@@ -1,4 +1,5 @@
 FROM ubuntu:latest
+MAINTAINER encrypt <encrypt@labr.xyz>
 
 RUN apt-get update && \
     apt-get upgrade -y
