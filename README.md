@@ -15,4 +15,5 @@ Visit https://127.0.0.1/
 Know Issues
 -----------
 
-Building is slow as hell.
+ * During the build, after the ssl certificate generation it stops to write on STDOUT. If you want to keep an eye on the bulding process you can use this workaround `watch docker top <container-id>`
+ * Building is slow as hell.
