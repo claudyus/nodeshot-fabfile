@@ -243,6 +243,7 @@ def create_db():
         db_sql = db_sql.replace('<password>', db_pass)
         append(filename='/tmp/db.sql', text=db_sql, use_sudo=use_sudo)
         cmd('chmod 777 /tmp/db.sql')
+        cmd('service postgresql start')
         cmd('su - postgres -c "psql -f /tmp/db.sql"')
         cmd('rm /tmp/db.sql')
 
@@ -316,6 +317,7 @@ def sync_data(update=None):
         _set_log_permissions()
         run('workon nodeshot && %s' % sync_command)
         # only on install
+        cmd('service redis-server start')
         if not update:
             run('workon nodeshot && ./manage.py loaddata initial_data')
 
@@ -391,6 +393,7 @@ def configure_supervisor():
         append(filename='/etc/supervisor/conf.d/celery-beat.conf', text=celerybeat_conf, use_sudo=use_sudo)
 
         _set_log_permissions()
+        cmd('service supervisor start')
         cmd('supervisorctl update')
 
 
